@@ -1,0 +1,72 @@
+# wandb
+wandb_enable: False
+project_name: ""
+display_name: ""
+
+
+# dataset
+# - basic
+num_worker: 8
+# - train
+train_item_file: "./dataset/movielens-1m/processed/item_feature.jsonl"
+train_seq_file: "./dataset/movielens-1m/processed/train_seq.jsonl"
+# - eval
+eval_item_file: "./dataset/movielens-1m/processed/item_feature.jsonl"
+eval_seq_file: "./dataset/movielens-1m/processed/eval_seq.jsonl"
+# - test
+test_item_file: "./dataset/movielens-1m/processed/item_feature.jsonl"
+test_seq_file: "./dataset/movielens-1m/processed/test_seq.jsonl"
+# - seq
+max_seq_length: 100
+# - vision    ["mp4", "embed", ~]
+train_vision_format: "embed"
+eval_vision_format: "embed"
+test_vision_format: "embed"
+max_vision_frames: 10
+# - text    ["txt", "embed", ~]
+train_text_format: "embed"
+eval_text_format: "embed"
+test_text_format: "embed"
+
+
+# model
+clip_model_path: "./weights/clip/ViT-B-32.pt"
+# - feature data
+vision_feature_embed_dim: 512
+text_feature_embed_dim: 512
+# - fusion model
+fusion_embed_dim: 512
+fusion_layers: 2
+fusion_heads: 8
+fusion_feedforward_dim: 1024
+fusion_dropout: 0.2
+fusion_embed_dropout: 0.2
+initializer_range: 0.02
+
+
+# train
+# - basic
+seed: 42
+log_file: "./logs/finetune-movielens-2layer.log"
+# - dataloader
+train_batch_size: 1024
+eval_batch_size: 1024
+test_batch_size: 1024
+# - train
+num_train_epochs: 500
+learning_rate: 0.001
+lr_scheduler_gamma: 1.0
+max_grad_norm: 1.0
+contrastive_temperature: 0.05
+# - ce
+ce_mask_ratio: 0.2
+# - eval
+early_stopping: 10
+# - save
+model_save_path: "./weights/finetune-movielens-1m-8192batch"
+model_resume_path: "./weights/pretrain-webvid-2layer-512dim"          # ["path/to/checkpoint", ~]
+
+
+
+
+
